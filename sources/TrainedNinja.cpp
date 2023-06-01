@@ -1,14 +1,6 @@
 #include "TrainedNinja.hpp"
-#include <iostream>
+using namespace ariel;
 
-using namespace std;
- namespace ariel {
-
-
-     TrainedNinja::TrainedNinja( string name, Point pos): Ninja(pos,name,120,12) {
-     };
+TrainedNinja::TrainedNinja(const string& name, Point position): Ninja(position, 120, name, 12){}
 
 
-     TrainedNinja::~TrainedNinja() {
-     };
- }

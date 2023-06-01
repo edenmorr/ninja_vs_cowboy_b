@@ -1,16 +1,13 @@
-#include <iostream>
+#ifndef COWBOY_VS_NINJA_A1_YOUNGNINJA_HPP
+#define COWBOY_VS_NINJA_A1_YOUNGNINJA_HPP
+
+
 #include "Ninja.hpp"
-#include "Point.hpp"
-using namespace std;
+
 namespace ariel{
- class YoungNinja : public Ninja {
-
+    class YoungNinja: public Ninja{
     public:
-        YoungNinja(string name, Point pos);
-
-        ~YoungNinja();
-
-        string print();
-};
+        YoungNinja(const string& name, Point position);
+    };
 }
-
+#endif 

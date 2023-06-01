@@ -1,61 +1,54 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <cassert>
 #include "Point.hpp"
+#include <iostream>
 #include <cmath>
-#include <vector>
-
 using namespace std;
-namespace ariel{ 
-// Point::Point(){
-//     this->x=0.0;
-//     this->y=0.0;
-// }
-Point::Point(double xCoord, double yCoord) : x(xCoord), y(yCoord) {}
+using namespace ariel;
 
-double Point::getX() const {
-    return x;
+Point::Point(double Xs_, double Ys_): Xs_(Xs_), Ys_(Ys_){}
+Point::Point(): Xs_(0), Ys_(0){}
+
+double Point::getX() const{
+    return Xs_;
 }
-
-double Point::getY() const {
-    return y;
+double Point::getY() const{
+    return Ys_;
 }
 
-void Point::setX(double xCoord) {
-    x = xCoord;
+void Point::setX(double Xs_){ 
+    this->Xs_ = Xs_;
 }
 
-void Point::setY(double yCoord) {
-    y = yCoord;
+void Point::setY(double Ys_){ 
+    this->Ys_ = Ys_;
 }
 
-double Point::distance(Point point) {
-    double dx = x - point.getX();
-    double dy = y - point.getY();
-    return sqrt(dx * dx + dy * dy);
+double Point::distance(const Point& other) {
+    return sqrt( pow(this->getX() - other.getX(), 2) * 1.0 + pow(this->getY() - other.getY(), 2) * 1.0);
 }
-void Point::print(){
-    cout<< "(" << x << "," << y << ")" << endl;
-}
-Point Point::moveTowards(Point source, Point destination, double distance){
-    if(distance<0){
-        throw std::invalid_argument(" invalid distance argument");
-    }
-double newP_x = destination.getX() - source.getX();
-double newP_y = destination.getY() - source.getY();
-double rashio = distance/source.distance(destination);//the rasio between the destenation of the dis and source to the distance of the close point
-if(rashio>=1){
-    rashio=1; // cheacking if the point is close
-}
-// we will move forwords 
-    newP_x+=rashio*source.getX();
-    newP_y+=rashio*source.getY();
 
-Point close_point(newP_x,newP_y);
-return close_point;
-}
+
+ Point Point::moveTowards(Point& src,Point& dst, double distance){
+
+            if(distance < 0){
+                throw invalid_argument("distance need to be positive");
+            }
+            double d = src.distance(dst);
+            if(d <= distance){
+                return dst;
+            }
+
+            double xCor = (dst.getX() - src.getX())/d;
+            double yCor = (dst.getY() - src.getY())/d;
+      
+            double xs = src.getX() + (xCor*distance);
+            double ys = src.getY() + (yCor*distance);
+
+            return {xs, ys};
+        }
+
+
+string Point::print() const{
+    return "(" + to_string(Xs_) + "," + to_string(Ys_) + ")";
 }
 
 

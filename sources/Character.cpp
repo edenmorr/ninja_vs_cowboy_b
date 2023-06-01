@@ -1,46 +1,55 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <cassert>
 #include "Character.hpp"
-#include <cmath>
-#include <string>
-
+#include <iostream>
+using namespace ariel;
 using namespace std;
-namespace ariel{ 
-Character::Character(Point location, int Point_of_impact, string name)
-    : location(location), Point_of_impact(Point_of_impact), name(name) {}
 
-   
-bool Character::isAlive() {
-    return Point_of_impact > 0;
+Character::Character(const Point& position, int hitPoint, const string& name):position(position), hitPoint(hitPoint), name(name){}
+
+Point& Character::getLocation(){
+    return position;
 }
 
-double Character::distance(const Character* other) const {
-    return this->distance(other);
+void Character::setPosition(ariel::Point other){
+
+    this->position.setX(other.getX());
+    this->position.setY(other.getY());
+
 }
-void Character::hit(int damage) {
-    if(damage <0){
-        throw invalid_argument("damage is negetive");
-    }
-    Point_of_impact -= damage;
-    }
 
 
-std::string Character::getName() const {
+int Character::getHp() const{
+    return hitPoint;
+}
+const string& Character::getName() const{
     return name;
 }
 
-Point Character::getLocation() const {
-    return location;
+bool Character::isAlive() const{
+    if(hitPoint > 0){
+        return true;
+    }
+    return false;
 }
 
-void Character::print() const {
-    std::cout << "Character: " << getName() << std::endl;
-    std::cout << "Hit Points: " << Point_of_impact << std::endl;
-    std::cout << "Location: " << "(" << location.getX() << "," << location.getY()<< ")" << endl;
-    // Point.print();
+bool Character::getInTeam() const{
+    return inTeam;
 }
 
+void Character::setInTeam(bool inTeam){
+    this->inTeam = inTeam;
+}
+
+double Character::distance(Character* other){
+    return position.distance(other->getLocation());
+}
+
+string Character::print() const{
+    return name + " " + position.print() + " " + to_string(hitPoint);
+}
+
+void Character::hit(int damage){
+    if(damage < 0){
+        throw invalid_argument("damage cannot be negative");
+    }
+    hitPoint -= damage;
 }

@@ -1,17 +1,6 @@
 #include "YoungNinja.hpp"
-#include <iostream>
+using namespace ariel;
 
-using namespace std;
- namespace ariel {
-
+YoungNinja::YoungNinja(const string& name, Point position): Ninja(position, 100, name, 14){}
 
 
-     YoungNinja::YoungNinja( string name, Point pos):Ninja(pos,name,100,14) {
-
-     };
-
-     YoungNinja::~YoungNinja() {
-     }
-
-
- }

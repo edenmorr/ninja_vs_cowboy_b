@@ -1,25 +1,22 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <cassert>
-#include "Point.hpp"
-#include "Character.hpp"
-#include <cmath>
-#include <string>
-#pragma once
-namespace ariel{ 
-class Cowboy:public Character
-    {
-protected:
-    int bullets;
-    int damage;
+#ifndef COWBOY_VS_NINJA_A1_COWBOY_HPP
+#define COWBOY_VS_NINJA_A1_COWBOY_HPP
 
-public:
-    Cowboy(string name ,Point location);
-    void shoot(Character* enemy);
-    bool hasboolets() const;
-    void reload();
-    string print();
-};
+#include "Character.hpp"
+
+namespace ariel{
+    class Cowboy: public Character{
+    private:
+        int bullets;
+    public:
+        Cowboy(const string& name, Point position);
+        ~Cowboy()override;
+
+        int getBullets() const;
+        bool hasboolets() const;
+
+        void shoot(Character* target);
+        void reload();
+    };
 }
+
+#endif 

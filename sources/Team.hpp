@@ -1,34 +1,37 @@
-#include "Character.hpp"
+#ifndef COWBOY_VS_NINJA_A1_TEAM_HPP
+#define COWBOY_VS_NINJA_A1_TEAM_HPP
+constexpr int  MAX_WARRIORS = 10;
+
+#include "YoungNinja.hpp"
+#include "TrainedNinja.hpp"
+#include "OldNinja.hpp"
 #include "Cowboy.hpp"
-#include "Ninja.hpp"
-#include "Point.hpp"
-#include <vector>
-#define TEAM_HPP
-#pragma once
+
 
 namespace ariel{
-class Team
-{
-private:
-vector<Character*> members;
-Character* leader; // poiner to the leader of the group 
-Team(Team &other);
-public:
-Team(Character* leader);
-virtual ~Team();
-virtual void add(Character* leader);
-virtual int stillAlive();
-virtual void attack(Team* team) = 0;
-void print();
-int size(){
-    return 0;
+    class Team{
+    protected:
+        Character* warriors[MAX_WARRIORS];
+        Character* leader;
+        int size; //number of warriors in the team
+    public:
+        Team(Character* leader);
+        virtual ~Team();
+
+        virtual void add(Character* character); 
+
+        void attack(Team* team);
+
+        void closestToLeader();
+
+        Character* closestVictim(Team* team);
+
+        int stillAlive();
+
+        void print() const;
+        
+
+    };
 }
-Character* closestMember(Character *member, const vector<Character*> &team);
-vector<Character*> GetMembers();
-Character* Getleader();
-void changeCaptain();
-virtual void attack(Team* other);
-void CowboysAttack(const Team *enemy);
-void NinjasAttack(const Team *enemy);
-};
-}
+
+#endif 

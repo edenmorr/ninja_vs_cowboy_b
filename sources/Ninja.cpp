@@ -1,39 +1,39 @@
 #include "Ninja.hpp"
 #include <iostream>
-#include <string>
-#include "Character.hpp"
-#include "YoungNinja.hpp"
-#include "TrainedNinja.hpp"
-#include "OldNinja.hpp"
-
-
+using namespace ariel;
 using namespace std;
-namespace ariel
-{
-    Ninja::Ninja(Point location,string name,int life,int speed):Character(location,life,name),speed(speed){}
+
+Ninja::Ninja(Point position, int hitsp, const string& name, int speed):Character(position, hitsp, name), speed(speed){}
+
+int Ninja::getSpeed() const{
+    return speed;
+}
+
+ Ninja::~Ninja(){}
 
 
-    void Ninja::slash(Character* enemy)
-    {
-        if((Character::distance(enemy))<=speed){
-            enemy->hit(40);
-        }
-        else {cout<<"foe is to far!!!\n";}// ninja cannot move more then his speed on every turn;
-    };
-    
-    void Ninja::move(Character* enemy)
-    {       
-    Point temp = Point::moveTowards(this->getLocation(),enemy->getLocation(),this->speed);
-    cout<< "new pos";
-    temp.print();
+void Ninja::slash(Character* target){
+    if(target == nullptr){
+        throw runtime_error("target cannot be null");
     }
-    
-    int Ninja::getSpeed()
-    {
-        return this->speed;
-    };
-    void Ninja::setSpeed(int speed)
-    {
-        this->speed = speed;
-    };
+    if(this == target){
+        throw runtime_error("you cannot slash yourself");
+    }
+    if(!this->isAlive()){
+        throw runtime_error("you cannot slash if you are dead");
+    }
+    else if(!target->isAlive()){
+        throw runtime_error("you cannot slash a dead target");
+    }
+    else{
+        if(this->distance(target) <= 1){
+            target->hit(40);
+        }
+    }
+}
+
+void Ninja::move(Character* target){
+    if(this->isAlive()){
+        this->setPosition(Point::moveTowards(this->getLocation(), target->getLocation(), speed));
+    }
 }

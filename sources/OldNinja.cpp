@@ -1,16 +1,4 @@
 #include "OldNinja.hpp"
-#include <iostream>
+using namespace ariel;
 
-using namespace std;
- namespace ariel {
-
-
-     OldNinja::OldNinja(string name,Point pos):Ninja(pos,name,150,8) {
-     };
-
-
-     OldNinja::~OldNinja() {
-     };
-
-
- }
+OldNinja::OldNinja(const string& name, Point position): Ninja(position, 150, name, 8){}

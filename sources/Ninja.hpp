@@ -1,22 +1,20 @@
+#ifndef COWBOY_VS_NINJA_A1_NINJA_HPP
+#define COWBOY_VS_NINJA_A1_NINJA_HPP
+
 #include "Character.hpp"
-#pragma once
 
 namespace ariel{
-class Ninja:public Character
-    {
+    class Ninja: public Character{
     private:
-    int speed;
-    int health;
-
+        int speed;
     public:
-    Ninja(Point location,string name,int initialHealth, int initialSpeed);
-    void move(Character* enemy);
-    void slash(Character* enemy);
+        Ninja(Point position, int hitsp, const string& name, int speed);
+        ~Ninja() override; 
 
-    //for tests
-    int getSpeed();
-    void setSpeed(int speed);
-    // string print();
+        int getSpeed() const;
+        void slash(Character* target);
+        void move(Character* target);
     };
- 
 }
+
+#endif 

@@ -1,18 +1,13 @@
-#include <iostream>
+#ifndef COWBOY_VS_NINJA_A1_OLDNINJA_HPP
+#define COWBOY_VS_NINJA_A1_OLDNINJA_HPP
+
 #include "Ninja.hpp"
 
-using namespace std;
-
-namespace ariel {
-
-
-    class OldNinja : public Ninja {
-
+namespace ariel{
+    class OldNinja: public Ninja{
     public:
-        OldNinja(string name, Point pos);
-
-        ~OldNinja();
-
-        string print();
+        OldNinja(const string& name, Point position);
     };
 }
+
+#endif 

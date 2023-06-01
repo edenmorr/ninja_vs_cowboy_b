@@ -1,31 +1,30 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
-#include <cassert>
+#ifndef COWBOY_VS_NINJA_A1_CHARACTER_HPP
+#define COWBOY_VS_NINJA_A1_CHARACTER_HPP
 #include "Point.hpp"
-#include <cmath>
-#include <string>
-#pragma once
 
-using namespace std;
-namespace ariel{ 
-class Character{
+namespace ariel
+{
+    class Character
+    {
+        Point position;
+        int hitPoint;
+        string name;
+        bool inTeam = false;
 
-public:
-bool inTeam;
-Point location;
-string name;
-int Point_of_impact;
-virtual bool isAlive();
-Character(Point location, int Point_of_impact,string name);
-// Character();
-double distance(const Character* other) const;
-void hit(int damage);
-string getName() const;
-Point getLocation() const;
-void print() const;
-void setInTeam();
-bool isInTeam();
-};
+    public:
+        Character(const Point &position, int hitPoint, const string &name);
+        virtual ~Character() = default;
+        Point &getLocation();
+        void setPosition(Point other);
+        int getHp() const;
+        const string &getName() const;
+        bool getInTeam() const;
+        void setInTeam(bool inTeam);
+        bool isAlive() const;
+        virtual double distance(Character *other);
+        string print() const;
+        void hit(int damage);
+    };
 }
+
+#endif 

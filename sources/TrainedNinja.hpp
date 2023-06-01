@@ -1,26 +1,14 @@
-#include <iostream>
+#ifndef COWBOY_VS_NINJA_A1_TRAINEDNINJA_HPP
+#define COWBOY_VS_NINJA_A1_TRAINEDNINJA_HPP
+
 #include "Ninja.hpp"
-#pragma once
 
-
-#ifndef TRAINEDNINJA_HPP
-#define TRAINEDINJA_HPP
-
-using namespace std;
-
-namespace ariel {
-
-
-    class TrainedNinja : public Ninja {
-
+namespace ariel{
+    class TrainedNinja: public Ninja{
+    private:
+        int speed;
     public:
-        TrainedNinja(string name,Point pos);
-
-        ~TrainedNinja();
-
-        string print();
+        TrainedNinja(const string& name, Point position);
     };
-
-
 }
-#endif
+#endif 
